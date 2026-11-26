@@ -1,4 +1,6 @@
-export type NavTab = 'dashboard' | 'prayer' | 'dua' | 'quran' | 'tajwid';
+export type NavTab = 'dashboard' | 'prayer' | 'dua' | 'quran' | 'tajwid' | 'settings';
+
+export type ThemeId = 'zamrud' | 'laut' | 'ungu' | 'mawar' | 'jingga' | 'tosca';
 
 export type FamilyMemberId = 'ayah' | 'ibu' | 'anak';
 

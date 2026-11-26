@@ -8,6 +8,7 @@ import {
   PrayerName,
   PrayerSchedule,
   QuranBookmark,
+  ThemeId,
 } from './types';
 import { INDONESIAN_CITIES } from './data/cities';
 import { useLocalStorage } from './hooks/useLocalStorage';
@@ -20,6 +21,10 @@ import { PrayerQiblaView } from './components/PrayerQiblaView';
 import { DuaDzikirView } from './components/DuaDzikirView';
 import { QuranView } from './components/QuranView';
 import { TajwidView } from './components/TajwidView';
+import { SettingsView } from './components/SettingsView';
+import { UpdateBanner } from './components/UpdateBanner';
+import { usePWAUpdate } from './hooks/usePWAUpdate';
+import { THEMES } from './data/themes';
 import { PWAInstallButton } from './components/PWAInstallButton';
 import { useOnlineStatus } from './hooks/usePWAInstall';
 
@@ -29,9 +34,11 @@ export default function App() {
   const [activeTab, setActiveTab] = useState<NavTab>('dashboard');
   const [now, setNow] = useState<Date>(() => new Date());
   const isOnline = useOnlineStatus();
+  const { needRefresh, applyUpdate, checkForUpdate, checking, lastCheckResult, dismiss } = usePWAUpdate();
 
   // Persisted Settings & User State in LocalStorage
   const [isDark, setIsDark] = useLocalStorage<boolean>('kb_dark_mode', false);
+  const [theme, setTheme] = useLocalStorage<ThemeId>('kb_theme', 'zamrud');
   const [cityId, setCityId] = useLocalStorage<string>('kb_city_id', 'jakarta');
   const [checklist, setChecklist] = useLocalStorage<DailyChecklistMap>('kb_ibadah_checklist', {});
   const [bookmark, setBookmark] = useLocalStorage<QuranBookmark | null>('kb_quran_bookmark', null);
@@ -57,6 +64,15 @@ export default function App() {
       document.documentElement.classList.remove('dark');
     }
   }, [isDark]);
+
+  // Terapkan tema warna ke <html data-theme> + warna bar browser
+  useEffect(() => {
+    const root = document.documentElement;
+    if (theme === 'zamrud') root.removeAttribute('data-theme');
+    else root.setAttribute('data-theme', theme);
+    const main = THEMES.find((t) => t.id === theme)?.main ?? '#047857';
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', main);
+  }, [theme]);
 
   // Real-time 1-second clock
   useEffect(() => {
@@ -255,6 +271,22 @@ export default function App() {
 
           {activeTab === 'tajwid' && <TajwidView />}
 
+          {activeTab === 'settings' && (
+            <SettingsView
+              theme={theme}
+              onSelectTheme={setTheme}
+              isDark={isDark}
+              onToggleDark={() => setIsDark((d) => !d)}
+              arabicFontSize={arabicFontSize}
+              onChangeArabicFontSize={setArabicFontSize}
+              adzanSoundEnabled={adzanSoundEnabled}
+              onToggleAdzanSound={() => setAdzanSoundEnabled((v) => !v)}
+              onCheckUpdate={checkForUpdate}
+              checkingUpdate={checking}
+              updateResult={lastCheckResult}
+            />
+          )}
+
           {/* Quiet Editorial Footer */}
           <footer className="mt-14 pt-6 border-t border-[#E4DEC9] dark:border-emerald-950/80 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-[#6A7870] dark:text-emerald-200/50">
             <span>Fika Family&apos;s · Sakinah Mawaddah Warohmah</span>
@@ -262,6 +294,8 @@ export default function App() {
           </footer>
         </div>
       </main>
+
+      {needRefresh && <UpdateBanner onUpdate={applyUpdate} onDismiss={dismiss} />}
 
       {/* Mobile Bottom Navigation */}
       <MobileNav activeTab={activeTab} onSelectTab={(tab) => handleNavigate(tab)} />

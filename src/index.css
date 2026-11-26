@@ -68,3 +68,75 @@ select:focus-visible {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* ===== Tema warna (mengganti palet 'emerald' yang dipakai seluruh aplikasi) ===== */
+html[data-theme="laut"] {
+  --color-emerald-50: #f0f9ff;
+  --color-emerald-100: #e0f2fe;
+  --color-emerald-200: #bae6fd;
+  --color-emerald-300: #7dd3fc;
+  --color-emerald-400: #38bdf8;
+  --color-emerald-500: #0ea5e9;
+  --color-emerald-600: #0284c7;
+  --color-emerald-700: #0369a1;
+  --color-emerald-800: #075985;
+  --color-emerald-900: #0c4a6e;
+  --color-emerald-950: #082f49;
+}
+html[data-theme="laut"] button:focus-visible, html[data-theme="laut"] a:focus-visible, html[data-theme="laut"] input:focus-visible, html[data-theme="laut"] select:focus-visible { outline-color: #0284c7; }
+html[data-theme="ungu"] {
+  --color-emerald-50: #f5f3ff;
+  --color-emerald-100: #ede9fe;
+  --color-emerald-200: #ddd6fe;
+  --color-emerald-300: #c4b5fd;
+  --color-emerald-400: #a78bfa;
+  --color-emerald-500: #8b5cf6;
+  --color-emerald-600: #7c3aed;
+  --color-emerald-700: #6d28d9;
+  --color-emerald-800: #5b21b6;
+  --color-emerald-900: #4c1d95;
+  --color-emerald-950: #2e1065;
+}
+html[data-theme="ungu"] button:focus-visible, html[data-theme="ungu"] a:focus-visible, html[data-theme="ungu"] input:focus-visible, html[data-theme="ungu"] select:focus-visible { outline-color: #7c3aed; }
+html[data-theme="mawar"] {
+  --color-emerald-50: #fff1f2;
+  --color-emerald-100: #ffe4e6;
+  --color-emerald-200: #fecdd3;
+  --color-emerald-300: #fda4af;
+  --color-emerald-400: #fb7185;
+  --color-emerald-500: #f43f5e;
+  --color-emerald-600: #e11d48;
+  --color-emerald-700: #be123c;
+  --color-emerald-800: #9f1239;
+  --color-emerald-900: #881337;
+  --color-emerald-950: #4c0519;
+}
+html[data-theme="mawar"] button:focus-visible, html[data-theme="mawar"] a:focus-visible, html[data-theme="mawar"] input:focus-visible, html[data-theme="mawar"] select:focus-visible { outline-color: #e11d48; }
+html[data-theme="jingga"] {
+  --color-emerald-50: #fff7ed;
+  --color-emerald-100: #ffedd5;
+  --color-emerald-200: #fed7aa;
+  --color-emerald-300: #fdba74;
+  --color-emerald-400: #fb923c;
+  --color-emerald-500: #f97316;
+  --color-emerald-600: #ea580c;
+  --color-emerald-700: #c2410c;
+  --color-emerald-800: #9a3412;
+  --color-emerald-900: #7c2d12;
+  --color-emerald-950: #431407;
+}
+html[data-theme="jingga"] button:focus-visible, html[data-theme="jingga"] a:focus-visible, html[data-theme="jingga"] input:focus-visible, html[data-theme="jingga"] select:focus-visible { outline-color: #ea580c; }
+html[data-theme="tosca"] {
+  --color-emerald-50: #f0fdfa;
+  --color-emerald-100: #ccfbf1;
+  --color-emerald-200: #99f6e4;
+  --color-emerald-300: #5eead4;
+  --color-emerald-400: #2dd4bf;
+  --color-emerald-500: #14b8a6;
+  --color-emerald-600: #0d9488;
+  --color-emerald-700: #0f766e;
+  --color-emerald-800: #115e59;
+  --color-emerald-900: #134e4a;
+  --color-emerald-950: #042f2e;
+}
+html[data-theme="tosca"] button:focus-visible, html[data-theme="tosca"] a:focus-visible, html[data-theme="tosca"] input:focus-visible, html[data-theme="tosca"] select:focus-visible { outline-color: #0d9488; }

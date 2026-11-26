@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { QuickMenu } from './QuickMenu';
 import heroImg from '../assets/images/hero_keluarga_berkah_1795585236214.jpg';
 import {
   Check,
@@ -138,6 +139,9 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
           </div>
         </div>
       </section>
+
+      {/* Menu Cepat berwarna */}
+      <QuickMenu onNavigate={onNavigate} />
 
       {/* Countdown Strip: Buka Puasa / Imsak + Ramadhan Berikutnya + Lanjutkan Tilawah */}
       <section className="grid grid-cols-1 md:grid-cols-3 gap-5">

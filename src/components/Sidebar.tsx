@@ -8,8 +8,10 @@ import {
   Moon,
   Sun,
   MapPin,
+  Palette,
 } from 'lucide-react';
 import { CityOption, NavTab } from '../types';
+import { NAV_COLORS } from '../data/navColors';
 import { PWAInstallButton } from './PWAInstallButton';
 
 interface SidebarProps {
@@ -26,6 +28,7 @@ const NAV_ITEMS: { id: NavTab; label: string; icon: React.FC<{ className?: strin
   { id: 'dua', label: 'Dzikir & Doa', icon: BookHeart },
   { id: 'quran', label: 'Al-Qur\'an Digital', icon: BookOpen },
   { id: 'tajwid', label: 'Belajar Tajwid', icon: GraduationCap },
+  { id: 'settings', label: 'Tampilan & Pengaturan', icon: Palette },
 ];
 
 export const Sidebar: React.FC<SidebarProps> = ({
@@ -62,18 +65,25 @@ export const Sidebar: React.FC<SidebarProps> = ({
         {NAV_ITEMS.map((item) => {
           const Icon = item.icon;
           const isActive = activeTab === item.id;
+          const c = NAV_COLORS[item.id];
           return (
             <button
               key={item.id}
               type="button"
               onClick={() => onSelectTab(item.id)}
-              className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-colors min-h-[44px] whitespace-nowrap ${
+              className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-colors min-h-[48px] whitespace-nowrap ${
                 isActive
-                  ? 'bg-emerald-700 text-white dark:bg-emerald-600 shadow-sm'
+                  ? `${c.active} shadow-sm`
                   : 'text-[#3D4E45] dark:text-[#C5D1CA] hover:bg-[#EAE4D3] dark:hover:bg-emerald-900/40'
               }`}
             >
-              <Icon className="w-5 h-5 shrink-0" />
+              <span
+                className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 ${
+                  isActive ? 'bg-white/20 text-white' : c.chip
+                }`}
+              >
+                <Icon className="w-[18px] h-[18px]" />
+              </span>
               <span className="truncate">{item.label}</span>
             </button>
           );
