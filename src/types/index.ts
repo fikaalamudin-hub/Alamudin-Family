@@ -50,7 +50,7 @@ export type PrayerName = keyof PrayerSchedule;
 
 export interface DuaItem {
   id: string;
-  category: 'setelah-sholat' | 'doa-harian';
+  category: 'setelah-sholat' | 'sholat-dhuha' | 'doa-harian';
   order?: number;
   title: string;
   subtitle: string;

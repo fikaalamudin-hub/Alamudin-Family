@@ -13,7 +13,7 @@ export const DuaDzikirView: React.FC<DuaDzikirViewProps> = ({
   arabicFontSize,
   onChangeArabicFontSize,
 }) => {
-  const [activeCategory, setActiveCategory] = useState<'setelah-sholat' | 'doa-harian'>('setelah-sholat');
+  const [activeCategory, setActiveCategory] = useState<'setelah-sholat' | 'sholat-dhuha' | 'doa-harian'>('setelah-sholat');
   const [tasbihCounts, setTasbihCounts] = useState<Record<string, number>>({});
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const [freeTasbih, setFreeTasbih] = useState(0);
@@ -94,7 +94,7 @@ export const DuaDzikirView: React.FC<DuaDzikirViewProps> = ({
 
       {/* Category Switcher + Quick Tasbih Digital Widget */}
       <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
-        <div className="inline-flex p-1 rounded-xl bg-[#EAE4D3] dark:bg-[#0F1C17] border border-[#DFD8C4] dark:border-emerald-950 self-start">
+        <div className="inline-flex p-1 rounded-xl bg-[#EAE4D3] dark:bg-[#0F1C17] border border-[#DFD8C4] dark:border-emerald-950 self-start max-w-full overflow-x-auto">
           <button
             type="button"
             onClick={() => setActiveCategory('setelah-sholat')}
@@ -104,7 +104,18 @@ export const DuaDzikirView: React.FC<DuaDzikirViewProps> = ({
                 : 'text-[#5B6B62] dark:text-emerald-200/70 hover:text-[#17231E] dark:hover:text-white'
             }`}
           >
-            Dzikir Setelah Sholat (Berurutan)
+            Setelah Sholat Fardhu
+          </button>
+          <button
+            type="button"
+            onClick={() => setActiveCategory('sholat-dhuha')}
+            className={`px-4 py-2.5 rounded-lg text-sm font-medium transition-colors min-h-[44px] whitespace-nowrap ${
+              activeCategory === 'sholat-dhuha'
+                ? 'bg-white dark:bg-emerald-700 text-[#17231E] dark:text-white shadow-sm'
+                : 'text-[#5B6B62] dark:text-emerald-200/70 hover:text-[#17231E] dark:hover:text-white'
+            }`}
+          >
+            Sholat Dhuha
           </button>
           <button
             type="button"
@@ -151,6 +162,16 @@ export const DuaDzikirView: React.FC<DuaDzikirViewProps> = ({
 
       {/* Dua & Dzikir Cards */}
       <div className="space-y-5">
+        {activeCategory === 'sholat-dhuha' && (
+          <div className="rounded-2xl bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-900/60 p-5 text-sm text-amber-900 dark:text-amber-100 space-y-1.5">
+            <p className="font-semibold">Tentang Sholat Dhuha</p>
+            <ul className="list-disc pl-5 space-y-1 leading-relaxed">
+              <li>Waktunya sejak matahari naik setinggi tombak (sekitar 15–20 menit setelah terbit) sampai menjelang Dzuhur.</li>
+              <li>Minimal 2 rakaat; boleh 4, 6, atau 8 rakaat, salam setiap 2 rakaat.</li>
+              <li>Rasulullah ﷺ bersabda bahwa dua rakaat dhuha mencukupi sedekah untuk seluruh persendian tubuh (HR. Muslim no. 720).</li>
+            </ul>
+          </div>
+        )}
         {filteredItems.map((item) => {
           const count = tasbihCounts[item.id] || 0;
           const isCompleted = count >= item.targetCount;
