@@ -1,0 +1,6 @@
+{
+  "name": "Fika Family's",
+  "description": "Aplikasi web Islami interaktif untuk keluarga Indonesia: hitung mundur sholat dan Ramadhan, tracker ibadah keluarga, jadwal sholat & arah kiblat, dzikir & doa harian, Al-Qur'an digital 114 surah, dan belajar tajwid interaktif.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
